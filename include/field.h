@@ -4,6 +4,10 @@
 /* number of points on one side the quadratic searching field has */
 #define FIELD_SIZE 20
 
+#define UNVISITED -1
+#define PATH -2
+#define PORT -3
+
 /* point of the field struct */
 typedef struct {
 	int x, y;
@@ -14,5 +18,11 @@ extern int field[FIELD_SIZE][FIELD_SIZE];
 void print_field();
 void unprint_field();
 void init_field();
+
+/*
+ * resets the values in the field for a next iteration
+ * (keeps ports and paths)
+ */
+void reset_field();
 
 #endif

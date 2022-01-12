@@ -7,7 +7,8 @@ int main()
 {
 	init_field();
 	fill_debug_nets(NUM_DEBUG_NETS);
-	route(nets[0]);
-
+	for(int i = 0; i < NUM_DEBUG_NETS; i++) {
+		route(nets[i]);
+	}
 	return 0;
 }

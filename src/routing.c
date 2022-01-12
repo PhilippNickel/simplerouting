@@ -9,8 +9,8 @@
 queue_t *queue;
 
 /* helps to traverse the field */
-const int xincr[8] = { -1, -1, 0, 1, 1, 1, 0, -1 };
-const int yincr[8] = { 0, 1, 1, 1, 0, -1, -1, -1 };
+const int xincr[8] = { -1, 0, 1, 0 };
+const int yincr[8] = { 0, 1, 0, -1 };
 
 void route(net_t net)
 {
@@ -48,12 +48,12 @@ void route(net_t net)
 		counter = field[x][y];
 
 		/* circle around every point */
-		for(int i = 0; i < 8; i++) {
+		for(int i = 0; i < 4; i++) {
 			nextx = x + xincr[i];
 			nexty = y + yincr[i];
 
 			/* check if point is visitable */
-			if(!(field[nextx][nexty] != -1 ||
+			if(!(field[nextx][nexty] != UNVISITED ||
 			   nextx < 0 ||
 			   nexty < 0 ||
 			   nextx > FIELD_SIZE ||
@@ -69,7 +69,7 @@ void route(net_t net)
 
 
 		}
-		usleep(100*1000);
+		usleep(50*1000);
 		unprint_field();
 		print_field();
 		counter++;
@@ -84,10 +84,10 @@ void route(net_t net)
 
 	do {
 		counter = field[x][y];
-		field[x][y] = -2;
+		field[x][y] = PATH;
 
 		/* circle around every point */
-		for(int i = 0; i < 8; i++) {
+		for(int i = 0; i < 4; i++) {
 			nextx = x + xincr[i];
 			nexty = y + yincr[i];
 
@@ -98,10 +98,20 @@ void route(net_t net)
 				break;
 			}
 
-			usleep(100*1000);
+			usleep(50*1000);
 			unprint_field();
 			print_field();
 
 		}
 	} while (!(x == startx && y == starty));
+
+	/* mark start and end of net as ports */
+	field[startx][starty] = PORT;
+	field[endx][endy] = PORT;
+
+	reset_field();
+
+	usleep(50*1000);
+	unprint_field();
+	print_field();
 }

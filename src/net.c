@@ -14,10 +14,10 @@ void fill_debug_nets(int amount)
 
 	for (int i = 0; i < amount; i++) {
 		net_t nnet;
-		nnet.x1 = rand() % (FIELD_SIZE + 1);
-		nnet.x2 = rand() % (FIELD_SIZE + 1);
-		nnet.y1 = rand() % (FIELD_SIZE + 1);
-		nnet.y2 = rand() % (FIELD_SIZE + 1);
+		nnet.x1 = rand() % (FIELD_SIZE);
+		nnet.x2 = rand() % (FIELD_SIZE);
+		nnet.y1 = rand() % (FIELD_SIZE);
+		nnet.y2 = rand() % (FIELD_SIZE);
 		nets[i] = nnet;
 	}
 }
