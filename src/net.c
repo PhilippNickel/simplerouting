@@ -30,3 +30,15 @@ void print_nets()
 	}
 }
 
+void fill_ports()
+{
+	int x1, y1, x2, y2;
+	for (int i = 0; i < NUM_DEBUG_NETS; i++) {
+		x1 = nets[i].x1;
+		y1 = nets[i].y1;
+		x2 = nets[i].x2;
+		y2 = nets[i].y2;
+		field[x1][y1] = PORT;
+		field[x2][y2] = PORT;
+	}
+}

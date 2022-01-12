@@ -57,7 +57,8 @@ void route(net_t net)
 			   nextx < 0 ||
 			   nexty < 0 ||
 			   nextx > FIELD_SIZE ||
-			   nexty > FIELD_SIZE)) {
+			   nexty > FIELD_SIZE) ||
+			   (nextx == endx && nexty == endy)) {
 				field[nextx][nexty] = counter + 1;
 
 				/* put the point in the to be visited queue */
@@ -69,7 +70,8 @@ void route(net_t net)
 
 
 		}
-		usleep(50*1000);
+
+		usleep(10*1000);
 		unprint_field();
 		print_field();
 		counter++;
@@ -98,11 +100,13 @@ void route(net_t net)
 				break;
 			}
 
-			usleep(50*1000);
-			unprint_field();
-			print_field();
 
 		}
+
+		usleep(10*1000);
+		unprint_field();
+		print_field();
+
 	} while (!(x == startx && y == starty));
 
 	/* mark start and end of net as ports */

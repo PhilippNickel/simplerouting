@@ -2,7 +2,7 @@
 #define FIELD_H
 
 /* number of points on one side the quadratic searching field has */
-#define FIELD_SIZE 20
+#define FIELD_SIZE 30
 
 #define UNVISITED -1
 #define PATH -2
