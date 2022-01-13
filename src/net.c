@@ -1,5 +1,6 @@
 #include "net.h"
 #include "field.h"
+#include "queue.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -18,6 +19,7 @@ void fill_debug_nets(int amount)
 		nnet.x2 = rand() % (FIELD_SIZE);
 		nnet.y1 = rand() % (FIELD_SIZE);
 		nnet.y2 = rand() % (FIELD_SIZE);
+		nnet.path = queue_new();
 		nets[i] = nnet;
 	}
 }
@@ -40,5 +42,16 @@ void fill_ports()
 		y2 = nets[i].y2;
 		field[x1][y1] = PORT;
 		field[x2][y2] = PORT;
+	}
+}
+
+void print_path(net_t net)
+{
+	printf("Found path:\n");
+	point_t *point;
+	int i = 0;
+	while((point = (point_t *)queue_dequeue(net.path)) != NULL) {
+		printf("P %i, x:%i, y:%i\n", i, point->x, point->y);
+		i++;
 	}
 }

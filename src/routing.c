@@ -95,8 +95,16 @@ void route(net_t net)
 
 			/* go to the one with val = currval - 1 */
 			if(field[nextx][nexty] == (counter - 1)) {
+
 				x = nextx;
 				y = nexty;
+
+				/* put the point in the nets path queue */
+				point_t *path_point = malloc(sizeof(point_t));
+				path_point->x = x;
+				path_point->y = y;
+				queue_enqueue(net.path, path_point);
+
 				break;
 			}
 
@@ -118,4 +126,6 @@ void route(net_t net)
 	usleep(50*1000);
 	unprint_field();
 	print_field();
+	print_path(net);
+	usleep(10000*1000);
 }
